@@ -6,12 +6,12 @@ import time
 
 import pandas as pd
 import numpy as np
-from utils import readCSV
+from utils import readChunk
 
 def getQuantitative(file, usecols):
 	s = time.time()
 	print("Getting the quantitative features: ", file)
-	transact = readCSV(file, usecols)
+	transact = readChunk(file, usecols)
 	transact = transact.loc[transact.gigyaid.notnull()]
 	if len(transact) == 0:
 		return pd.DataFrame()
@@ -43,7 +43,7 @@ def getQuantitative(file, usecols):
 def getDate(file, usecols):
 	s = time.time()
 	print("Getting the time features: ", file)
-	transact = readCSV(file, usecols)
+	transact = readChunk(file, usecols)
 	transact = transact.loc[transact.gigyaid.notnull()]
 	if len(transact) == 0:
 		return pd.DataFrame()

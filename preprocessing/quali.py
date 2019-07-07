@@ -7,12 +7,12 @@ import time
 import pandas as pd
 import numpy as np
 
-from utils import readCSV
+from utils import readChunk
 
 def getQualitative(file, usecols):
 	s = time.time()
 	print("Getting the qualitative features: ", file)
-	transact = readCSV(file, usecols)
+	transact = readChunk(file, usecols)
 	transact = transact.loc[transact.gigyaid.notnull()]
 	transact.loc[transact.browsertype.notnull(), "browsertype"] = "WEB APPLICATION"
 	transact.browsertype.replace(np.nan, "MOBILE APPLICATION", inplace = True)
