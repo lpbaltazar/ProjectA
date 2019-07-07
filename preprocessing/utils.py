@@ -16,7 +16,7 @@ def toCSV(df, filename, index = True, encoding = None):
 
 def readChunk(filename, usecols, chunksize = 5000000, iterator = True):
 	s = time.time()
-	df = pd.read_csv(file, usecols = usecols, dtype = str, low_memory = False,
+	df = pd.read_csv(filename, usecols = usecols, dtype = str, low_memory = False,
 		chunksize = chunksize, iterator = iterator)
 	df = pd.concat(df)
 	e = time.time()
