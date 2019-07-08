@@ -45,12 +45,14 @@ if __name__ == '__main__':
 		outfile = os.path.join(download_dir, f[-38:])
 		downloader = multithread.ADLDownloader(adl, f, outfile)
 		if downloader.successful():
-			print("Finished Downloading!")
+			e = time.time()
+			total_time = time.strftime("%H:%M:%S", time.gmtime(e-s))
+			print("Finished downloading: ", total_time)
 			main(outfile, f)
 			os.remove(outfile)
 			e = time.time()
 			total_time = time.strftime("%H:%M:%S", time.gmtime(e-s))
-			print("Finished downloading: ", total_time)
+			print("Total processing time: ", total_time)
 			with open("downloaded.txt", "a") as myfile:
 				myfile.write(f)
 		else:
