@@ -3,7 +3,7 @@ warnings.filterwarnings("ignore")
 
 import os
 import time
-from utils import toCSV
+from utils import toCSV, getDownloaded
 from quali import getQualitative
 from quanti import getQuantitative, getDate
 from multiprocessing import Pool
@@ -36,9 +36,9 @@ def main(file, f):
 if __name__ == '__main__':
 	token = lib.auth()
 	adl = core.AzureDLFileSystem(token, store_name = 'bigdatadevdatalake')
-
+	downloaded = getDownloaded()
 	for f in adl.ls(data_dir):
-		if f == "ProdDataHub/TransactionFactTable/IWant/2018/12/IWantTransactionFactTable-20181201.csv": continue
+		if f in  downloaded: continue
 		s = time.time()
 		print("Processing file {}".format(f[-38:]))
 		outfile = os.path.join(download_dir, f[-38:])
@@ -50,6 +50,8 @@ if __name__ == '__main__':
 			e = time.time()
 			total_time = time.strftime("%H:%M:%S", time.gmtime(e-s))
 			print("Finished downloading: ", total_time)
+			with open("downloaded.txt", "a") as myfile:
+    			myfile.write(f)
 		else:
 			print("error in downloading!")
 	# main('../downloaded/IWantTransactionFactTable-20181201.csv', 'ProdDataHub/TransactionFactTable/IWant/2018/12/IWantTransactionFactTable-20181201.csv')

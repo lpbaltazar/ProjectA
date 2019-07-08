@@ -24,3 +24,8 @@ def readChunk(file, usecols=None, chunksize = 5000000, iterator = True):
 	total_time = time.strftime("%H:%M:%S", time.gmtime(e-s))
 	print("Total read time: ", total_time)
 	return df
+
+def getDownloaded():
+	with open('downloaded.txt') as f:
+		downloaded = f.read().splitlines()
+	return downloaded

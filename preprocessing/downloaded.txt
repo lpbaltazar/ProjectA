@@ -1,0 +1,4 @@
+ProdDataHub/TransactionFactTable/IWant/2018/12/IWantTransactionFactTable-20181201.csv
+ProdDataHub/TransactionFactTable/IWant/2018/12/IWantTransactionFactTable-20181202.csv
+ProdDataHub/TransactionFactTable/IWant/2018/12/IWantTransactionFactTable-20181203.csv
+ProdDataHub/TransactionFactTable/IWant/2018/12/IWantTransactionFactTable-20181204.csv
