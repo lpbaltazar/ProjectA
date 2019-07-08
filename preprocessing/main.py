@@ -37,6 +37,7 @@ if __name__ == '__main__':
 	token = lib.auth()
 	adl = core.AzureDLFileSystem(token, store_name = 'bigdatadevdatalake')
 	downloaded = getDownloaded()
+	print("Downloaded files: ", downloaded)
 	for f in adl.ls(data_dir):
 		if f in  downloaded: continue
 		s = time.time()
@@ -51,7 +52,7 @@ if __name__ == '__main__':
 			total_time = time.strftime("%H:%M:%S", time.gmtime(e-s))
 			print("Finished downloading: ", total_time)
 			with open("downloaded.txt", "a") as myfile:
-    			myfile.write(f)
+				myfile.write(f)
 		else:
 			print("error in downloading!")
 	# main('../downloaded/IWantTransactionFactTable-20181201.csv', 'ProdDataHub/TransactionFactTable/IWant/2018/12/IWantTransactionFactTable-20181201.csv')
