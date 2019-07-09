@@ -16,21 +16,20 @@ from preprocessing.utils import readChunk, toCSV
 cols = ["USERID", "SESSIONID", "SESSION_STARTDT", "SESSION_ENDDT"]
 def removeNotLoggedIn(df):
 	df["loggedin"] = df[["USERID", "PRIMARY_FINGERPRINT"]].apply(lambda x: 0 if re.search(x[1], x[0]) else 1, axis = 1)
+	df = df.loc[df.loggedin == 1]
+	print("logged in users: ", len(df))
 	return df
 
 def main(data_dir, outdir):
 	s = time.time()
 	count = 0
 	for f in os.listdir(data_dir):
-		count = count+1
 		print("Extracting cols for: ", f)
 		df = readChunk(os.path.join(data_dir, f))
 		df["USERID"] = df["USERID"].astype(str)
 		df["PRIMARY_FINGERPRINT"] = df["PRIMARY_FINGERPRINT"].astype(str)
-		df = removeNotLoggedIn(df)
 		print("all users: ", len(df))
-		df = df.loc[df.loggedin == 1]
-		print("logged in users: ", len(df))
+		df = removeNotLoggedIn(df)
 		df = df[cols]
 		outfile = os.path.join(outdir, f[-12:])
 		toCSV(df, outfile)
