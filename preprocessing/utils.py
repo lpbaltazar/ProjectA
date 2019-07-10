@@ -15,10 +15,10 @@ def readCSV(file, usecols=None, converters = None, encoding = None, dtype = str)
 def toCSV(df, filename, index = True, encoding = None):
 	df.to_csv(filename, index = index, sep = ',', encoding = encoding)
 
-def readChunk(file, usecols=None, chunksize = 5000000, iterator = True):
+def readChunk(file, converters = None, usecols=None, chunksize = 5000000, iterator = True):
 	s = time.time()
 	df = pd.read_csv(file, usecols = usecols, dtype = str, low_memory = False,
-		chunksize = chunksize, iterator = iterator)
+		chunksize = chunksize, iterator = iterator, converters = converters)
 	df = pd.concat(df)
 	e = time.time()
 	total_time = time.strftime("%H:%M:%S", time.gmtime(e-s))
