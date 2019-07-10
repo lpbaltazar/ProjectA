@@ -66,3 +66,8 @@ def main(data_dir, out_dir):
 	print("Finish month processing: ", total_time)
 if __name__ == '__main__':
 	main("../../events/2018/12", "../../events/quali/december")
+	main("../../events/2019/01", "../../events/quali/january")
+	main("../../events/2019/02", "../../events/quali/february")
+	main("../../events/2019/03", "../../events/quali/march")
+	main("../../events/2019/04", "../../events/quali/april")
+	main("../../events/2019/05", "../../events/quali/may")
